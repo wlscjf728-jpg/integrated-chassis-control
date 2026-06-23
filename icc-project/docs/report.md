@@ -265,6 +265,20 @@ DLC 경로추종 조건에서는 lateral deviation이 마지막까지 어려운 
 
 *Figure 2. 직진 제동 응답 비교. ABS 저속 작동 범위를 확장한 뒤 후륜 lock이 제거되었다.*
 
+
+### 4.1 가산점 항목 검증
+
+Tutorial Workbook의 가산점 항목은 네 가지로 정리된다. 본 설계에서 실제로 증빙 가능한 항목은 A2 Severe DLC 추가 검증, coordinator의 마찰원 기반 allocation, 속도/상태 기반 gain scheduling이다. C1/C2 CDC 항목은 skyhook CDC를 구현했지만, 현재 `run_icc_scenario('C1'/'C2')` 출력에서 `aw_rms`나 peak suspension 지표가 따로 기록되지 않아 본 보고서에서는 정량 가산점 근거로 과하게 주장하지 않았다.
+
+| 가산점 항목 | Workbook 기준 | 본 설계 근거 | 예상 |
+|---|---|---|---:|
+| A2 Severe DLC 또는 A5 FMVSS 126 추가 통과 | 둘 중 하나 통과 | A2 Severe DLC ON: sideSlipMax 2.432 deg, LTR_max 0.589, lateralDevMax 0.366 m. Severe DLC에서도 slip/LTR/path deviation이 안정 범위에 있음. A5는 `sineDwellPass=0`이라 주장하지 않음. | +3 |
+| 마찰원 + WLS allocation | $\sqrt{F_x^2+F_y^2}\leq \mu F_z$ 검사 + WLS 분배 | `ctrl_coordinator.m`에서 휠별 $F_z$ 비례 제동 배분, 횡력 사용량을 고려한 friction-circle 제한, ESC yaw moment의 좌우 차동제동 배분을 구현함. | +3 |
+| gain scheduling 또는 LPV | 속도 적응 게인 적용 + 효능 입증 | `ctrl_lateral.m`에서 고속 영역 AFS gain을 낮추고, 제동/비제동 및 slip 상태에 따라 ESC/AYC gain과 조향 보정량을 조절함. A3/A1/A7/D1에서 같은 구조로 안정성 KPI를 만족함. | +2 |
+| C1 single bump 또는 C2 sweep CDC 효능 | `aw_rms` 감소율 또는 peak 감소 | skyhook CDC와 roll/pitch 기반 damping scheduling은 구현되어 있으나, 현재 결과 파일에 ride KPI가 없어 가산점 근거로는 보류함. | 보류 |
+
+따라서 본 보고서에서 명확히 주장할 수 있는 가산점 근거는 최대 +8점이다. +10점을 모두 주장하려면 C1 또는 C2에 대해 `aw_rms`, suspension peak, ISO 2631 comfort 지표를 별도로 산출해 baseline 대비 감소를 표로 추가해야 한다.
+
 ---
 
 ## 5. 분석과 한계
