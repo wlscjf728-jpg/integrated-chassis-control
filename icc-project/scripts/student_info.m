@@ -12,7 +12,7 @@ function info = student_info()
 
     info.student_id   = '202126248';
     info.name         = '정진철';
-    info.team_members = {struct('id', '202221649', 'name', '박승준')};
+    info.team_members = {};   % 2인 팀이면 {struct('id','...','name','...')} 추가
 
     info.course = '자동제어 - 2026 봄';
 
