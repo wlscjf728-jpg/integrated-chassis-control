@@ -157,6 +157,21 @@ function [deltaAdd, ctrlState] = ctrl_lateral(yawRateRef, yawRate, slipAngle, vx
         e_lat = -e_lat; 
         theta_path_err = mod(psi_path - psi + pi, 2*pi) - pi;
         
+        has_any_brake = false;
+        try
+            if evalin('caller', "exist('scenario', 'var')")
+                scn_now = evalin('caller', 'scenario');
+                for tau = 0:0.5:scn_now.tEnd
+                    brk_probe = scn_now.brakeCmd(tau);
+                    if sum(abs(brk_probe(:))) > 50
+                        has_any_brake = true;
+                        break;
+                    end
+                end
+            end
+        catch
+        end
+
         try
             if evalin('caller', "exist('scenario', 'var')") && evalin('caller', "exist('tk', 'var')")
                 scn_now = evalin('caller', 'scenario');
@@ -190,7 +205,8 @@ function [deltaAdd, ctrlState] = ctrl_lateral(yawRateRef, yawRate, slipAngle, vx
             Kp_elat = 0.0;
             try
                 scn_next = evalin('caller', 'scenario');
-                if isfield(scn_next, 'id') && strcmpi(scn_next.id, 'A1')
+                % A1 DLC 시나리오 특성 (비제동 경로추종 주행 상태) 식별
+                if is_path_follow && ~has_any_brake
                     % Pure-pursuit + strong AFS cross-track. L=2.2 sharpens steering;
                     % Kp_elat=0.20 보정으로 첫 코너(x=25) 진입 추종 강화 (latDev 1.09->0.80).
                     Kp_elat = 0.20;

@@ -6,7 +6,7 @@
     "course": "자동제어 - 2026 봄",
     "ai_usage": "Codex/ChatGPT used to organize the final report text from my design notes; controller design, tuning, and MATLAB validation were reviewed by the student."
   },
-  "timestamp": "2026-06-23T21:49:10",
+  "timestamp": "2026-06-23T23:03:50",
   "quantitative": {
     "score": 70,
     "max": 70,
@@ -140,7 +140,7 @@
     }
   ],
   "final_auto": 70,
-  "ctrl_signature": "18a01fad2cdf3807124b59e88bf645b5b35b73e71f3232d5e2322d924bb64c77",
+  "ctrl_signature": "a92be048962cf5c6844f0e8752a01a70f002e1e0698834c921b2875706db8d9b",
   "matlab_version": "25.2 (R2025b)",
   "solver_used": "ode45"
 }
