@@ -1,4 +1,4 @@
-﻿function info = student_info()
+function info = student_info()
 %STUDENT_INFO 학생 정보 — 채점 시 매칭에 사용. **반드시 수정해서 제출.**
 %
 %   info struct fields:
@@ -12,7 +12,7 @@
 
     info.student_id   = '202126248';
     info.name         = '정진철';
-    info.team_members = {};   % 2인 팀이면 {struct('id','...','name','...')} 추가
+    info.team_members = {struct('id', '202221649', 'name', '박승준')};
 
     info.course = '자동제어 - 2026 봄';
 

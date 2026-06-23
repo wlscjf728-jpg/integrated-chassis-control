@@ -2,11 +2,16 @@
   "student": {
     "student_id": "202126248",
     "name": "정진철",
-    "team_members": [],
+    "team_members": [
+      {
+        "id": "202221649",
+        "name": "박승준"
+      }
+    ],
     "course": "자동제어 - 2026 봄",
     "ai_usage": "Codex/ChatGPT used to organize the final report text from my design notes; controller design, tuning, and MATLAB validation were reviewed by the student."
   },
-  "timestamp": "2026-06-23T23:03:50",
+  "timestamp": "2026-06-23T23:14:02",
   "quantitative": {
     "score": 70,
     "max": 70,
