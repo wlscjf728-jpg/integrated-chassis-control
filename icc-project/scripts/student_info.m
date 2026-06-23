@@ -1,4 +1,4 @@
-function info = student_info()
+﻿function info = student_info()
 %STUDENT_INFO 학생 정보 — 채점 시 매칭에 사용. **반드시 수정해서 제출.**
 %
 %   info struct fields:
@@ -10,8 +10,8 @@ function info = student_info()
 %
 %   본 파일을 수정하지 않으면 -5점 감점 + 채점 시트 매칭 불가.
 
-    info.student_id   = 'TODO_FILL_YOUR_STUDENT_ID';
-    info.name         = 'TODO_FILL_YOUR_NAME';
+    info.student_id   = '202126248';
+    info.name         = '정진철';
     info.team_members = {};   % 2인 팀이면 {struct('id','...','name','...')} 추가
 
     info.course = '자동제어 - 2026 봄';
@@ -19,7 +19,7 @@ function info = student_info()
     % AI 도구 사용 사실 (정직 신고) — 사용 안 했으면 'none'
     %   예: 'ChatGPT used for PID gain tuning suggestion'
     %       'Claude used to debug LQR design'
-    info.ai_usage = 'none';
+    info.ai_usage = 'Codex/ChatGPT used to organize the final report text from my design notes; controller design, tuning, and MATLAB validation were reviewed by the student.';
 
     %% 검증 (수정 금지)
     if contains(info.student_id, 'TODO_FILL')
